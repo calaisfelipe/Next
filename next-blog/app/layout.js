@@ -1,21 +1,20 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import Navbar from "@/components/Navbar";
+import Navbar from "./components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Routing test",
-  description: "all rights reserved to Calais Corp",
+  title: "Calais Blog",
+  description: "Blog Felipe Calais, criado com next.js",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="pt-br">
+    <html lang="en">
       <body className={inter.className}>
         <Navbar />
-        {children}
-      </body>
+        {children}</body>
     </html>
   );
 }

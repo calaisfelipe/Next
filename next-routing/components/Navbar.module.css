@@ -1,0 +1,17 @@
+.container{
+    display: flex;
+    padding: 1.5em 1.2em;
+    background-color: #222;
+    color: #fff;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+
+.navList{
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    gap: .5em;
+}
+
