@@ -4,7 +4,7 @@ import {GrInstagram, GrGithub, GrTwitter, GrFacebook } from 'react-icons/gr'
 export default function Navbar() {
 
   return (
-    <nav className="p-3 flex items-center justify-center bg-emerald-950 text-white flex-col sm:flex-row gap-2 shadow-2xl" >
+    <nav className="px-10 py-5 flex items-center justify-center bg-emerald-950 text-white flex-col sm:flex-row gap-2 shadow-2xl " >
         <h2 className="grow text-xl"><Link href='/'>Calais Blog</Link></h2>
 
         <ul className="flex gap-3 ">
