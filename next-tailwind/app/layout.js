@@ -1,5 +1,5 @@
-'use client'
-import { useState } from 'react'
+//'use client'
+//import { useState } from 'react'
 import { menuContext } from '@/lib/menuContext'
 import './globals.css'
 import { Inter } from 'next/font/google'
@@ -15,16 +15,19 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
-    const [menuMobile, setMenuMobile] = useState(false)
+    //const [menuMobile, setMenuMobile] = useState(false)
 
 
   return (
     <html lang="pt-br" className='sm:scroll-smooth'>
       <body className={inter.className}>
-        <Navbar menu={{menu: menuMobile, setMenu:setMenuMobile}}/>   
+      {children}
+       {/* <Navbar menu={{menu: menuMobile, setMenu:setMenuMobile}}/>   
         <menuContext.Provider value={{menu: menuMobile, setMenu:setMenuMobile}}>
-        {children}
+        
         </menuContext.Provider>
+      */}
+
         <Footer />
 
         </body>

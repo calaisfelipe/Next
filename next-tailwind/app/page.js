@@ -9,7 +9,7 @@ import infinityImage from "../public/rocketlaunch.png";
 import Testimonial from "./components/Testimonial";
 import ProductCard from "./components/ProductCard";
 import Divider from "./components/Divider";
-import MenuMobile from "./components/MenuMobile";
+//import MenuMobile from "./components/MenuMobile";
 
 export default function Home() {
     const menu = useContext(menuContext)
@@ -21,7 +21,7 @@ export default function Home() {
     sm:justify-center sm:pt-20
     place-content-start p-4 relative "
     >
-      <MenuMobile menu={menu}/>
+      {/*<MenuMobile menu={menu}/>*/}
 
       <section
         className="text-white flex 
