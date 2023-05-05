@@ -5,3 +5,19 @@
 .radial-blue{
   background-image: radial-gradient(yellow , blue);
 }
+
+@layer utilities{
+    .topHidden{
+      top: -225px;
+      transition: all .3s;
+    }
+
+    .topShow{
+      top: -225px;
+      transform: translateY(225px);
+      transition: all .3s;
+      height: 100vh;
+      
+    }
+
+}

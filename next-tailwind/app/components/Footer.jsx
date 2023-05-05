@@ -11,7 +11,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="p-4 bg-teal-700 flex justify-evenly text-white ">
+    <footer className="p-4 bg-teal-700 flex justify-evenly text-white " aria-label="footer">
       <p className="font-extralight text-sm">
         Acme Rocket: Powered Products
         <br />

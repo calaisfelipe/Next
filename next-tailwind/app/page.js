@@ -1,5 +1,7 @@
+'use client'
+import { useContext } from "react";
+import { menuContext} from "@/lib/menuContext";
 import Image from "next/image";
-
 import mainImage from "../public/rocketdab.png";
 import explorerImage from "../public/rocketman.png";
 import adventurerImage from "../public/rocketride.png";
@@ -7,15 +9,20 @@ import infinityImage from "../public/rocketlaunch.png";
 import Testimonial from "./components/Testimonial";
 import ProductCard from "./components/ProductCard";
 import Divider from "./components/Divider";
+import MenuMobile from "./components/MenuMobile";
 
 export default function Home() {
+    const menu = useContext(menuContext)
+
   return (
     <main
       className="
     bg-black min-h-screen  grid  
     sm:justify-center sm:pt-20
-    place-content-start p-4  "
+    place-content-start p-4 relative "
     >
+      <MenuMobile menu={menu}/>
+
       <section
         className="text-white flex 
 
@@ -89,7 +96,9 @@ export default function Home() {
       <Divider />
 
       <section className="text-white grid place-content-center py-20">
-        <h2 className="text-3xl font-bold pb-5 text-center ">Testimonials</h2>
+        <h2 id="testimonials" className="text-3xl font-bold pb-5 text-center ">
+          Testimonials
+        </h2>
 
         <Testimonial
           author="-Wile E.Coyote, Genius"
@@ -149,5 +158,7 @@ export default function Home() {
         </form>
       </section>
     </main>
+    
+  
   );
 }
