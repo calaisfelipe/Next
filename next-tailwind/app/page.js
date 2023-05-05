@@ -1,6 +1,5 @@
 'use client'
-import { useContext } from "react";
-import { menuContext} from "@/lib/menuContext";
+import {useState } from "react";
 import Image from "next/image";
 import mainImage from "../public/rocketdab.png";
 import explorerImage from "../public/rocketman.png";
@@ -9,19 +8,25 @@ import infinityImage from "../public/rocketlaunch.png";
 import Testimonial from "./components/Testimonial";
 import ProductCard from "./components/ProductCard";
 import Divider from "./components/Divider";
-//import MenuMobile from "./components/MenuMobile";
+import MenuMobile from "./components/MenuMobile";
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 
 export default function Home() {
-    const menu = useContext(menuContext)
 
+  const [menuMobile, setMenuMobile] = useState(false)
+
+   
   return (
+    <>
+    <Navbar menu={{menu:menuMobile, setMenu: setMenuMobile}}/>
     <main
       className="
     bg-black min-h-screen  grid  
     sm:justify-center sm:pt-20
     place-content-start p-4 relative "
     >
-      {/*<MenuMobile menu={menu}/>*/}
+      {<MenuMobile menu={{menu: menuMobile, setMenu: setMenuMobile}}/>}
 
       <section
         className="text-white flex 
@@ -158,7 +163,9 @@ export default function Home() {
         </form>
       </section>
     </main>
-    
+
+    <Footer />
+    </>
   
   );
 }

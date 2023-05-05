@@ -1,12 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { BiMenu } from "react-icons/bi";
-import {IoClose} from 'react-icons/io5'
+import { IoClose } from "react-icons/io5";
 
-export default function Navbar({menu}) {
- // const [menu, setMenu] = useState(false);
-
+export default function Navbar({ menu }) {
   function goToScroll(top) {
     menu.setMenu(false);
     window.scrollTo({
@@ -18,8 +16,6 @@ export default function Navbar({menu}) {
 
   return (
     <>
-      
-
       <nav className="flex p-4 bg-teal-700 text-white sm:justify-evenly justify-between ">
         <a href="#">
           <h3 className="text-xl font-bold"> &#x1F680; Acme Rockets</h3>
@@ -37,8 +33,11 @@ export default function Navbar({menu}) {
           </li>
         </ul>
 
-        <button onClick={() => menu.setMenu(!menu.menu)} className="sm:hidden text-3xl">
-          { !menu.menu ? <BiMenu /> : <IoClose />}
+        <button
+          onClick={() => menu.setMenu(!menu.menu)}
+          className="sm:hidden text-3xl"
+        >
+          {!menu.menu ? <BiMenu /> : <IoClose />}
         </button>
       </nav>
     </>
