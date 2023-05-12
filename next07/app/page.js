@@ -1,35 +1,58 @@
-'use client'
+"use client";
 
-import Image from 'next/image'
-import chatbot from '../public/chatbot.svg'
+import Image from "next/image";
+import chatbot from "../public/chatbot.svg";
 import { useState } from "react";
 import { postToApi } from "@/lib/postToApi";
+import MessageField from "./components/messageField";
+
 
 export default function Home() {
-  const [message, setMessage] = useState('')
-  const [resultMessage, setResultMessage] = useState(null)
+  const [message, setMessage] = useState("");
+  const [resultMessage, setResultMessage] = useState(null);
+  const [messagesArray, setMessagesArray] = useState([]);
 
- const sendPostToApi = async (post) =>{
+  const sendPostToApi = async (post) => {
+    const result = await postToApi(post);
+    setResultMessage(result);
+    setMessagesArray([...messagesArray, post, result.choices[0].message.content])
+    /* const newArray = [...messagesArray, result.choices[0].message.content]
+      setMessagesArray(newArray)*/
+  };
 
-    const result = await postToApi(post)
-    setResultMessage(result)
- }
-
+  const generate = async (message) => {
   
+    
+    await sendPostToApi(message);
+    setMessage("");
+
+
+  };
 
   return (
-    <main className="flex min-h-lg flex-row items-start justify-center xl:justify-evenly p-12 gap-5" >
-
-    <article>
-      <Image className=' xl:block hidden'
-      
-      src={chatbot} width={500} height={600}/>
-    </article>
+    <main className="flex min-h-lg flex-row items-start justify-center xl:justify-evenly p-12 gap-5">
+      <article>
+        <Image
+          className=" xl:block hidden"
+          src={chatbot}
+          width={500}
+          height={600}
+          alt="ChatBot image"
+        />
+      </article>
       <section className="border border-black rounded-md p-4 flex flex-col gap-4 shadow-2xl">
         <h1 className="text-3xl font-bold">Streaming OpenAI</h1>
         <div id="resultContainer" className="h-48 overflow-y-auto">
           <p className="text-gray-500 text-sm mb-2">Generated send...</p>
-          <p id="resultText" className='break-words w-96  '>{resultMessage && JSON.stringify(resultMessage)}</p>
+
+          <div id="resultText" className="w-96 flex flex-col">
+            {messagesArray.length >= 1 &&
+              messagesArray.map((message, index) => (
+                <MessageField key={index} message={message} />
+              ))}
+              <MessageField message='teste' type='user' />
+              <MessageField message='teste2' type='AI' />
+          </div>
         </div>
 
         <input
@@ -44,14 +67,15 @@ export default function Home() {
         />
 
         <div className="flex p-2 justify-evenly">
-          <button 
-          className="rounded-xl p-2 bg-black text-white"
-          onClick={() => sendPostToApi(message)}
+          <button
+            className="rounded-xl p-2 bg-black text-white"
+            onClick={() => generate(message)}
           >
             Generate
           </button>
-          <button className="rounded-xl p-2 bg-white text-black border border-black w-24"
-          //onClick={stopGenerate}
+          <button
+            className="rounded-xl p-2 bg-white text-black border border-black w-24"
+            //onClick={stopGenerate}
           >
             Stop
           </button>
