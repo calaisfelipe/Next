@@ -6,31 +6,45 @@ import { useState } from "react";
 import { postToApi } from "@/lib/postToApi";
 import MessageField from "./components/messageField";
 
-
 export default function Home() {
   const [message, setMessage] = useState("");
-  const [resultMessage, setResultMessage] = useState(null);
   const [messagesArray, setMessagesArray] = useState([]);
+  const [loading , setLoading] = useState(false)
 
   const sendPostToApi = async (post) => {
     const result = await postToApi(post);
-    setResultMessage(result);
-    setMessagesArray([...messagesArray, post, result.choices[0].message.content])
+   
+    if(result.choices[0].message.content){
+    setMessagesArray([
+      ...messagesArray,
+      post,
+      result.choices[0].message.content,
+    ]);}else{
+      console.log('ERR: Resposta não encontrada')
+      setLoading(false)
+      return
+    }
+    
+    setLoading(false)
+
     /* const newArray = [...messagesArray, result.choices[0].message.content]
       setMessagesArray(newArray)*/
   };
 
   const generate = async (message) => {
-  
-    
-    await sendPostToApi(message);
+    setLoading(true)
     setMessage("");
-
-
+    await sendPostToApi(message);
+    
   };
 
+  const stopChat = () => {
+    setMessagesArray([])
+    setMessage('')
+  }
+
   return (
-    <main className="flex min-h-lg flex-row items-start justify-center xl:justify-evenly p-12 gap-5">
+    <main className="flex min-h-xl flex-row items-start justify-center xl:justify-evenly p-12 gap-5">
       <article>
         <Image
           className=" xl:block hidden"
@@ -40,18 +54,26 @@ export default function Home() {
           alt="ChatBot image"
         />
       </article>
-      <section className="border border-black rounded-md p-4 flex flex-col gap-4 shadow-2xl">
+      <section className="border border-black rounded-md p-4 flex flex-col gap-4 shadow-2xl ">
         <h1 className="text-3xl font-bold">Streaming OpenAI</h1>
-        <div id="resultContainer" className="h-48 overflow-y-auto">
-          <p className="text-gray-500 text-sm mb-2">Generated send...</p>
 
-          <div id="resultText" className="w-96 flex flex-col">
+        {loading ? <p className="text-gray-500 text-sm mb-2">Generating...</p> : <p className="text-gray-500 text-sm mb-2">Generated send...</p>}
+
+        <div id="resultContainer" className="overflow-y-auto h-64">
+
+        
+
+          <div id="resultText" className="w-96 flex flex-col gap-3 ">
+
             {messagesArray.length >= 1 &&
               messagesArray.map((message, index) => (
-                <MessageField key={index} message={message} />
+                <MessageField
+                  key={index}
+                  message={message}
+                  type={index % 2 === 0 ? "user" : "AI"}
+                />
               ))}
-              <MessageField message='teste' type='user' />
-              <MessageField message='teste2' type='AI' />
+
           </div>
         </div>
 
@@ -61,21 +83,22 @@ export default function Home() {
           placeholder="Enter prompt..."
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          /*onKeyUp={(e) => {if(e.key === 'Enter'){
-            sendPostToApi(message)
-            }}}*/
+          onKeyUp={(e) => {if(e.key === 'Enter'){
+            generate(message)
+            }}}
         />
 
         <div className="flex p-2 justify-evenly">
           <button
             className="rounded-xl p-2 bg-black text-white"
             onClick={() => generate(message)}
+            disabled={loading}
           >
-            Generate
+            {loading ? 'Generating...' : 'Generate'}
           </button>
           <button
             className="rounded-xl p-2 bg-white text-black border border-black w-24"
-            //onClick={stopGenerate}
+            onClick={stopChat}
           >
             Stop
           </button>

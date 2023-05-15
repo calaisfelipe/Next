@@ -1,4 +1,4 @@
-const API_KEY = "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";
+const API_KEY = "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";
 const API_URL = "https://api.openai.com/v1/chat/completions";
 
 export const postToApi = async ( message ) => {
@@ -17,6 +17,7 @@ export const postToApi = async ( message ) => {
     body: JSON.stringify({
       model: "gpt-3.5-turbo",
       messages: [{ role: "user", content: message }],
+      //stream: true,
     }),
   });
 
