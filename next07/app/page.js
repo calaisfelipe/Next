@@ -44,8 +44,11 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-xl flex-row items-start justify-center xl:justify-evenly sm:p-12 p-4 gap-5">
-      <article className="xl:block hidden" >
+    <main className="
+    xl:justify-evenly xl:items-start
+    sm:flex-row sm:p-12 
+    flex flex-col min-h-xl gap-5 justify-center items-center p-4">
+      <article className="lg:block hidden" >
         <Image
           src={chatbot}
           width={500}
@@ -53,16 +56,16 @@ export default function Home() {
           alt="ChatBot image"
         />
       </article>
-      <section className="border border-black rounded-md p-4 flex flex-col gap-4 shadow-2xl ">
+      <section className="border border-black rounded-md p-4 flex flex-col gap-4 shadow-2xl " >
         <h1 className="text-3xl font-bold">Streaming OpenAI</h1>
 
         {loading ? <p className="text-gray-500 text-sm mb-2">Generating...</p> : <p className="text-gray-500 text-sm mb-2">Generated send...</p>}
 
-        <div id="resultContainer" className="overflow-y-auto sm:h-64">
+        <div id="resultContainer" className="overflow-y-auto sm:h-64 ">
 
         
 
-          <div id="resultText" className="sm:w-96 w-auto h-full flex flex-col gap-3 ">
+          <div id="resultText" className="sm:w-96  w-auto flex flex-col gap-3 self-stretch sm:h-auto h-56">
 
             {messagesArray.length >= 1 &&
               messagesArray.map((message, index) => (
