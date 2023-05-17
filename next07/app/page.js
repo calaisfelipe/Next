@@ -62,7 +62,7 @@ export default function Home() {
 
         
 
-          <div id="resultText" className="sm:w-96 w-auto flex flex-col gap-3 ">
+          <div id="resultText" className="sm:w-96 w-auto h-full flex flex-col gap-3 ">
 
             {messagesArray.length >= 1 &&
               messagesArray.map((message, index) => (
