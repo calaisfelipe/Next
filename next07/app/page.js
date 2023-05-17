@@ -4,7 +4,7 @@ import Image from "next/image";
 import chatbot from "../public/chatbot.svg";
 import { useState } from "react";
 import { postToApi } from "@/lib/postToApi";
-import MessageField from "./components/messageField";
+import MessageField from "./components/MessageField";
 
 export default function Home() {
   const [message, setMessage] = useState("");
