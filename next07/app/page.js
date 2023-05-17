@@ -44,10 +44,9 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-xl flex-row items-start justify-center xl:justify-evenly p-12 gap-5">
-      <article>
+    <main className="flex min-h-xl flex-row items-start justify-center xl:justify-evenly sm:p-12 p-4 gap-5">
+      <article className="xl:block hidden" >
         <Image
-          className=" xl:block hidden"
           src={chatbot}
           width={500}
           height={600}
@@ -59,11 +58,11 @@ export default function Home() {
 
         {loading ? <p className="text-gray-500 text-sm mb-2">Generating...</p> : <p className="text-gray-500 text-sm mb-2">Generated send...</p>}
 
-        <div id="resultContainer" className="overflow-y-auto h-64">
+        <div id="resultContainer" className="overflow-y-auto sm:h-64">
 
         
 
-          <div id="resultText" className="w-96 flex flex-col gap-3 ">
+          <div id="resultText" className="sm:w-96 w-auto flex flex-col gap-3 ">
 
             {messagesArray.length >= 1 &&
               messagesArray.map((message, index) => (

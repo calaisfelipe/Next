@@ -1,4 +1,4 @@
-const API_KEY = "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";
+const API_KEY = "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";
 const API_URL = "https://api.openai.com/v1/chat/completions";
 
 export const postToApi = async ( message ) => {
