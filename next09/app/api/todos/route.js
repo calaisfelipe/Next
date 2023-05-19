@@ -2,12 +2,19 @@ import { NextResponse } from "next/server";
 
 const url = "http://localhost:5000/todos";
 
-export async function GET() {
+export async function GET(request) {
+  const origin = request.headers.get('origin')
+
   const response = await fetch(url);
 
   const data = await response.json();
 
-  return NextResponse.json(data);
+  return new NextResponse(JSON.stringify(data),{
+    headers:{
+      'Access-Control-Allow-Origin': origin || '*',
+      'Content-Type': 'application/json'
+    }
+  });
 }
 
 export async function POST(request) {

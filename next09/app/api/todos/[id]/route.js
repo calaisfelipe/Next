@@ -1,68 +1,66 @@
 import { NextResponse } from "next/server";
 
+
 const url = "http://localhost:5000/todos";
 
-export async function GET(request){
+export async function GET(request, {params: {id}}) {
+ 
+  const res = await fetch(`${url}/${id}`);
 
-    const id = request.url.slice(request.url.lastIndexOf('/') + 1)
+  const result = await res.json();
 
-    const res = await fetch(`${url}/${id}`)
+  if (!result.id) {
+    return NextResponse.json({ "message": "Todo not founded" });
+  }
 
-    const result = await res.json()
-
-    if(!result.id){
-        return NextResponse.json({"message": "Todo not founded"})
-    }
-
-    return NextResponse.json(result)
-
+  return NextResponse.json(result);
 }
 
+export async function DELETE(request, {params: {id}}) {
+  
 
-export async function DELETE(request) {
-    const  id  = request.url.slice(request.url.lastIndexOf('/') +1)
-  
-    if (!id) {
-      return NextResponse.json({ "message": "Todo id required" });
-    }
-  
-    const res = await fetch(`${url}/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  
-    const response = await res.json();
-  
-    return NextResponse.json({ "message": "Post deleted" });
+  if (!id) {
+    return NextResponse.json({ "message": "Todo id required" });
   }
 
+  const res = await fetch(`${url}/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      "API-KEY": process.env.DATA_API_KEY
+    },
+  });
 
-  export async function PUT(request) {
+  const response = await res.json();
 
-    const  id  = request.url.slice(request.url.lastIndexOf('/') +1)
+  return NextResponse.json({ "message": "Post deleted" });
+}
 
-    const { userId, title, completed } = await request.json();
-  
-    if (!id || !userId || !title || typeof(completed) !== 'boolean') {
-      return NextResponse.json({ "message": "Missing require data" });
-    }
-  
-    const data = await fetch(`${url}/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "appplication/json",
-      },
-      body: JSON.stringify({
-          userId, title, completed
-      }),
-    });
-  
-    const updated = await data.json();
-  
-    return NextResponse.json({
-      "message": "todo modified",
-      "post": updated,
-    });
+export async function PUT(request, {params : {id}}) {
+
+  const { userId, title, completed } = await request.json();
+
+  if (!id || !userId || !title || typeof completed !== "boolean") {
+    return NextResponse.json({ "message": "Missing require data" });
   }
+
+  const data = await fetch(`${url}/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "appplication/json",
+      "API-KEY": DATA_API_KEY
+    },
+    body: JSON.stringify({
+      userId,
+      title,
+      completed,
+    }),
+  });
+
+  const updated = await data.json();
+
+  return NextResponse.json({
+    message: "todo modified",
+    post: updated,
+  });
+}

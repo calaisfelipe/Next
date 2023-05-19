@@ -1,7 +1,7 @@
 import React from "react";
 import { getSortedPostsData } from "@/lib/posts";
 import Link from "next/link";
-import getFormattedDate from "@/lib/getFormattedDate";
+import getFormattedDate from "@/lib/getFormattedDate"; 
 
 export default function Posts() {
   const posts = getSortedPostsData();
