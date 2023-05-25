@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import chatbot from "../public/chatbot.svg";
+import chatbot from "../public/chatbotpic.jpg";
 import { useState } from "react";
 import { postToApi } from "@/lib/postToApi";
 import MessageField from "./components/MessageField";
@@ -48,7 +48,7 @@ export default function Home() {
     xl:justify-evenly xl:items-start
     sm:flex-row sm:p-12 
     flex flex-col min-h-xl gap-5 justify-center items-center p-4">
-      <article className="lg:block hidden" >
+      <article className="md:block hidden" >
         <Image
           src={chatbot}
           width={500}
